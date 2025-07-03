@@ -1,6 +1,6 @@
 if Grid2.isClassic then return end
 
-local Shields                 = Grid2.statusPrototype:new("heal-absorbs-custom")
+local Shields                 = Grid2.statusPrototype:new("heal-absorb-modified")
 local Grid2                   = Grid2
 local fmt                     = string.format
 local UnitGetTotalHealAbsorbs = UnitGetTotalHealAbsorbs
@@ -43,11 +43,19 @@ local function GetPercentHealthMax(_, unit)
 end
 
 function Shields:GetText(unit)
-    return fmt("%.1fk", (UnitGetTotalHealAbsorbs(unit) or 0) / 1e3)
+	local dbx = self.dbx
+	local absorb = (UnitGetTotalHealAbsorbs(unit) or 0)
+
+	if dbx.displayMillionShort then
+		if absorb >= 1e6 then
+			return fmt("%.1fM", absorb / 1e6 )
+		end
+	end
+	return fmt("%.1fk", (UnitGetTotalHealAbsorbs(unit) or 0) / 1e3  )
 end
 
 function Shields:IsActive(unit)
-    return UnitGetTotalHealAbsorbs(unit) or 0 > 0
+    return  (UnitGetTotalHealAbsorbs(unit) or 0) > 0
 end
 
 function Shields:UpdateDB()
@@ -60,11 +68,11 @@ local function Create(baseKey, dbx)
     return Shields
 end
 
-Grid2.setupFunc["heal-absorbs-custom"] = Create
+Grid2.setupFunc["heal-absorb-modified"] = Create
 
-Grid2:DbSetStatusDefaultValue("heal-absorbs-custom",
+Grid2:DbSetStatusDefaultValue("heal-absorb-modified",
     {
-        type = "heal-absorbs-custom",
+        type = "heal-absorb-modified",
         thresholdMedium = 75000,
         thresholdLow = 25000,
         colorCount = 3,

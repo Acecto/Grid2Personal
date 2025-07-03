@@ -1,8 +1,12 @@
-## Interface: 110002
+## Interface: 110107
 ## Title: Grid2 |cd1ff7d0aPersonal(Plugin)|r
 ## Notes: Adding personal modules to Grid2
 ## Author: Theruchi(EU-Draenor)
+## IconTexture: Interface/AddOns/Grid2/media/iconsmall.tga
 
-## Dependencies: Grid2
+
+## Dependencies: Grid2, Grid2Options
+
 
 Grid2AbsorbModify.lua
+options\AbsorbModify.lua
