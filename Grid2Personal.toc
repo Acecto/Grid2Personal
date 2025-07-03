@@ -1,0 +1,8 @@
+## Interface: 110002
+## Title: Grid2 |cd1ff7d0aPersonal(Plugin)|r
+## Notes: Adding personal modules to Grid2
+## Author: Theruchi(EU-Draenor)
+
+## Dependencies: Grid2
+
+Grid2AbsorbModify.lua
